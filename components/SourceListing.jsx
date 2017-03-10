@@ -1,8 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as firebase from "firebase";
+import request from 'superagent';
+
+import ListAllSources from './ListAllSources.jsx';
 
 export default class SourceListing extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: false,
+            data:[],
+        };
+        this.source();
+    }
+
+    source(){
+        var ReactThis = this;
+        var myurl = 'https://newsapi.org/v1/sources';
+          request
+          .get(myurl)
+          .set('Accept', 'application/json')
+          .end(function(err, res) {
+            ReactThis.setState({ data: res.body.sources, loaded:true});
+          });
+    }
 
     logout = () => {
         firebase.auth().signOut().then(function() {
@@ -13,8 +35,13 @@ export default class SourceListing extends React.Component {
         });
     }
     render(){
-        return (<div><h1>HELLO YOU ARE LOGGED IN</h1>
-                <h3 onClick={this.logout}>Logout</h3></div>
-            );
+        return (
+            <div>
+                <h3 onClick={this.logout}>Logout</h3>
+                <div>
+                    {this.state.loaded ? <ListAllSources data={this.state.data} /> : ''}
+                </div>
+            </div>
+        );
     }
 }
