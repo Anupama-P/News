@@ -19,6 +19,12 @@ export default class Home extends React.Component {
         };
     }
 
+    static get contextTypes() {
+        return {
+            router: React.PropTypes.object.isRequired,
+        };
+    }
+
     authenticate = () => {
         var email = this.refs.email.value;
         var password = this.refs.password.value;
@@ -30,7 +36,7 @@ export default class Home extends React.Component {
                 localStorage.setItem("loggedin", true)
             }
             if(localStorage.getItem("loggedin")=='true') {
-                window.location.href = "http:www.google.com"
+                ReactThis.context.router.push('/home')
             }
             }).catch(function(error) {
             var errorCode = error.code;
