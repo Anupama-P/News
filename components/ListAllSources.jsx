@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import Dropdown from 'react-dropdown';
 
+import { Link } from 'react-router';
+
 export default class ListAllSources extends React.Component {
     constructor(props) {
         super(props);
@@ -37,6 +39,10 @@ export default class ListAllSources extends React.Component {
         })
     }
 
+    setname = (name) => {
+        localStorage.setItem("name", name )
+    }
+
     render() {
         var filteredItems = this.props.data;
         var filterProperties = ["language", "country", "category"];
@@ -67,9 +73,10 @@ export default class ListAllSources extends React.Component {
                   )}
                 </select>
                 {filteredItems.map((source,i) =>
-                    <div key={i}>{source.name}
+                    <div key={i}><Link to='/headlines' onClick={this.setname.bind(this,source.id)}>
+                    {source.name}
                     <img src={source.urlsToLogos.small} />
-                    {source.language}</div>
+                    {source.language}</Link></div>
                 )}
             </div>
         );
