@@ -1,0 +1,116 @@
+@mixin background($imgpath,$position:0 0,$repeat: no-repeat) {
+    background: {
+        image: url($imgpath);
+        position: $position;
+        repeat: $repeat;
+        size: cover;
+    }
+}
+
+$break-small: 767px;
+$login-color: #343434;
+$login-text-color: white;
+
+.btn {
+    background: navajowhite;
+    border: 0;
+    padding: 12px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 25px;
+    outline: white;
+    color: dimgrey;
+    font-family: cursive;
+    &:hover {
+        background-color: white;
+        color: black;
+    }
+    @media screen and (max-width: $break-small){
+        font-size: 24px;
+        border-radius: 35px;
+    }
+}
+
+html {
+    height: 100%;
+    @include background('/images/background.jpg');
+}
+
+.loginpage {
+    width: 320px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 5px 5px 14px -5px #888;
+    padding: 20px;
+    background: $login-color;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+    transform: translateY(-50%);
+    opacity: 0.96;
+
+    .loginform {
+        padding: 20px;
+        .form-group {
+            width: 100%;
+            margin: 10px 0;
+            text-align: left;
+
+            label {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 10px;
+                color: $login-text-color;
+                font-family: cursive;
+                font-size: 24px;
+            }
+
+            .form-control {
+                display: block;
+                width: 88%;
+                height: 15px;
+                padding: 10px 18px;
+                font-size: 15px;
+                line-height: 1.42857143;
+                color: #333333;
+                background-color: #ffffff;
+                border: 1px solid #cccccc;
+                border-radius: 5px;
+                margin: 0 auto;
+                margin-top: 10px;
+                margin-bottom: 25px;
+            }
+            .buttonClass{
+                text-align: center;
+                padding-top: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $break-small) {
+    .loginpage {
+        width: 80%;
+
+    .loginform {
+        .form-group {
+
+            label {
+                font-size: 32px;
+            }
+
+            .form-control {
+                width: 93%;
+                height: 55px;
+                font-size: 24px;
+            }
+
+            .buttonClass{
+                padding-top: 20px;
+            }
+        }
+    }
+}
+}

@@ -52,11 +52,28 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <input type="text" ref="email" />
-                <input type="password" ref="password" />
-                <input type="submit" onClick={this.authenticate}/>
+            <div className='loginpage'>
+                <form id='loginform' className='loginform'>
+                    <div className='form-group'>
+                        <label htmlFor="Emailinput" className="col-sm-2 control-label">Email</label>
+                        <div className="col-sm-12">
+                            <input type="email" name="email" placeholder="Email" id="Emailinput" className="form-control" ref='email' />
+                        </div>
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor="Passwordinput" className="col-sm-2 control-label">Password</label>
+                        <div className="col-sm-12">
+                            <input type="password" placeholder="Password" id="Passwordinput" className="form-control" ref='password' />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="buttonClass">
+                            <button type="submit" className="btn btn-default" onClick={this.authenticate}>Sign in</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         );
     }
 }
+
