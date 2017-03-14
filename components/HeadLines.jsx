@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import request from 'superagent';
 
+import Masonry from 'react-masonry-component';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+
 export default class HeadLines extends React.Component  {
     constructor(props){
         super(props);
@@ -12,7 +16,7 @@ export default class HeadLines extends React.Component  {
         this.articles();
     }
 
-    articles(){
+    articles() {
         var ReactThis = this;
         var source = localStorage.getItem("name");
         var apiKey = '41469ea1681d4bdd95fee5c4af3abaa5';
@@ -28,11 +32,27 @@ export default class HeadLines extends React.Component  {
     render() {
         return (
             <div>
-                {this.state.data.map((article,i) => 
-                    <div key={i}><a href={article.url}><b>{article.title}</b>
-                    {article.description}</a></div>
-                )}
+                <Header />
+                <div className="container">
+                    <Masonry className='list-source row'>
+                            {this.state.data.map((article,i) =>
+                                <div className='col-md-4 col-sm-12'>
+                                    <div key={i} className="eachsource">
+                                        <img src={article.urlToImage} alt='articles' />
+                                        <div className="about-source">
+                                            <h3>{article.title}</h3>
+                                            <p>{article.description}</p>
+                                        </div>
+                                        <a href={article.url} target="_blank">
+                                            <button className='btn btn-source'>Read More</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
+                    </Masonry>
+                </div>
+                <Footer /> 
             </div>
-            );
+        );
     }
 }

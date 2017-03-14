@@ -4,6 +4,8 @@ import * as firebase from "firebase";
 import request from 'superagent';
 
 import ListAllSources from './ListAllSources.jsx';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
 export default class SourceListing extends React.Component {
     constructor(props) {
@@ -15,7 +17,7 @@ export default class SourceListing extends React.Component {
         this.source();
     }
 
-    source(){
+    source() {
         var ReactThis = this;
         var myurl = 'https://newsapi.org/v1/sources';
           request
@@ -26,21 +28,14 @@ export default class SourceListing extends React.Component {
           });
     }
 
-    logout = () => {
-        firebase.auth().signOut().then(function() {
-          localStorage.setItem("loggedin", false);
-          location.reload();
-        }).catch(function(error) {
-          // An error happened.
-        });
-    }
     render(){
         return (
             <div>
-                <h3 onClick={this.logout}>Logout</h3>
+                <Header />
                 <div>
                     {this.state.loaded ? <ListAllSources data={this.state.data} /> : ''}
                 </div>
+                <Footer />
             </div>
         );
     }

@@ -19,13 +19,21 @@ export default class Home extends React.Component {
         };
     }
 
+    componentWillMount() {
+        document.body.classList.add('login-bg');
+    }
+    componentWillUnmount() {
+        document.body.classList.remove('login-bg');
+    }
+
     static get contextTypes() {
         return {
             router: React.PropTypes.object.isRequired,
         };
     }
 
-    authenticate = () => {
+    authenticate = (e) => {
+        e.preventDefault();
         var email = this.refs.email.value;
         var password = this.refs.password.value;
         var ReactThis = this;
@@ -52,26 +60,25 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div className='loginpage'>
-                <form id='loginform' className='loginform'>
-                    <div className='form-group'>
-                        <label htmlFor="Emailinput" className="col-sm-2 control-label">Email</label>
-                        <div className="col-sm-12">
-                            <input type="email" name="email" placeholder="Email" id="Emailinput" className="form-control" ref='email' />
+            <div className='outerdiv'>
+                <div className='overlay'></div>
+                <div className='loginpage'>
+                    <form id='loginform' className='loginform' onSubmit={this.authenticate}>
+                        <div className='form-group'>
+                            <label htmlFor="Emailinput" className="control-label">Email</label>
+                            <input type="email" name="email" placeholder="Email" id="Emailinput" className="form-control" ref='email' required/>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor="Passwordinput" className="col-sm-2 control-label">Password</label>
-                        <div className="col-sm-12">
-                            <input type="password" placeholder="Password" id="Passwordinput" className="form-control" ref='password' />
+                        <div className='form-group'>
+                            <label htmlFor="Passwordinput" className="control-label">Password</label>
+                            <input type="password" placeholder="Password" id="Passwordinput" className="form-control" ref='password' required/>
                         </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="buttonClass">
-                            <button type="submit" className="btn btn-default" onClick={this.authenticate}>Sign in</button>
+                        <div className="form-group">
+                            <div className="buttonClass">
+                                <button type="submit" className="btn btn-default">Sign in</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         );
     }
