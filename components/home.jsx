@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as firebase from "firebase";
+import {Link} from 'react-router';
+
 
 var config = {
   apiKey: "AIzaSyB4KQ7EgWVmHXK3N_NavI_acsxqOaFM4hQ",
@@ -72,6 +74,7 @@ export default class Home extends React.Component {
                             <label htmlFor="Passwordinput" className="control-label">Password</label>
                             <input type="password" placeholder="Password" id="Passwordinput" className="form-control" ref='password' required/>
                         </div>
+                        <h4><Link to='/forgot-password'>forgot password?</Link></h4>
                         <div className="form-group">
                             <div className="buttonClass">
                                 <button type="submit" className="btn btn-default">Sign in</button>
