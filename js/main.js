@@ -10,7 +10,7 @@ import '../sass/home.scss';
 
 import { render } from 'react-dom';
 import {Router, Route} from 'react-router';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 function loggedIn() {
   if(localStorage.getItem("loggedin")=='true'){
@@ -38,7 +38,7 @@ function checkAuth(nextState, replace) {
 }
 
 ReactDOM.render((
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={Home} onEnter={checkAuth}/>
     <Route path="/home" component={SourceListing} onEnter={requireAuth} />
     <Route path="/headlines" component={HeadLines} onEnter={requireAuth} />
