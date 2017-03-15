@@ -141,6 +141,10 @@ html {
     @include background('/images/background.jpg');
 }
 
+.error {
+    color: red;
+}
+
 .loginpage {
     width: 320px;
     margin: 0 auto;
@@ -257,6 +261,38 @@ body {
                     padding-top: 20px;
                 }
             }
+        }
+    }
+
+    .eachsource {
+        .about-source {
+            h3 {
+                font-size: 48px;
+            }
+            p {
+                font-size: 30px;
+            }
+        }
+
+        .btn-source {
+            font-size: 24px;
+        }
+    }
+    .List-content {
+        .select-grp {
+            width: 50%;
+            margin: auto;
+        }
+
+        label {
+            font-size: 24px;
+        }
+
+        select {
+            width: 230px;
+            margin: 20px 13px;
+            height: 45px;
+            margin-top: 0;
         }
     }
 }

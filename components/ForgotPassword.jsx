@@ -5,6 +5,12 @@ import {Link} from 'react-router';
 import serialize from 'form-serialize';
 
 export default class ForgotPassword extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            error:''
+        };
+    }
 
     componentWillMount() {
         document.body.classList.add('login-bg');
@@ -27,8 +33,9 @@ export default class ForgotPassword extends React.Component {
         var ReactThis = this;
         auth.sendPasswordResetEmail(obj.email).then(function(res) {
             ReactThis.context.router.push('/success')
+            ReactThis.setState({error:''});
         }, function(error) {
-          alert(error.message)
+          ReactThis.setState({error:error.message});
         });
     }
 
@@ -45,9 +52,10 @@ export default class ForgotPassword extends React.Component {
                             <label htmlFor="Emailinput" className="control-label">Email</label>
                             <input type="email" name="email" placeholder="Email" id="Emailinput" className="form-control" required/>
                         </div>
+                        {this.state.error ?<div className='error'>{this.state.error}</div> : "" }
                         <div className="form-group">
                             <div className="buttonClass">
-                                <button type="submit" className="btn btn-default">Send</button>
+                                <button type="submit" className="btn">Send</button>
                             </div>
                         </div>
                         <Link to='/'>Back to sign in</Link>

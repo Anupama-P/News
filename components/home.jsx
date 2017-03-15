@@ -18,6 +18,7 @@ export default class Home extends React.Component {
         this.state = {
             loaded: false,
             data:[],
+            error:''
         };
     }
 
@@ -46,15 +47,16 @@ export default class Home extends React.Component {
                 localStorage.setItem("loggedin", true)
             }
             if(localStorage.getItem("loggedin")=='true') {
+                ReactThis.setState({error:''})
                 ReactThis.context.router.push('/home')
             }
             }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
+                ReactThis.setState({error:'wrong password'});
             } else {
-                alert(errorMessage);
+                ReactThis.setState({error:errorMessage});
             }
               document.getElementById('quickstart-sign-in').disabled = false;
         });
@@ -74,6 +76,7 @@ export default class Home extends React.Component {
                             <label htmlFor="Passwordinput" className="control-label">Password</label>
                             <input type="password" placeholder="Password" id="Passwordinput" className="form-control" ref='password' required/>
                         </div>
+                        {this.state.error ?<div className='error'>{this.state.error}</div> : "" }
                         <h4><Link to='/forgot-password'>forgot password?</Link></h4>
                         <div className="form-group">
                             <div className="buttonClass">
