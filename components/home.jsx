@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as firebase from "firebase";
 import {Link} from 'react-router';
+import Modal from 'react-modal';
 
 
 var config = {
@@ -18,7 +19,8 @@ export default class Home extends React.Component {
         this.state = {
             loaded: false,
             data:[],
-            error:''
+            error:'',
+            isModalOpen:false
         };
     }
 
@@ -44,11 +46,19 @@ export default class Home extends React.Component {
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(value) {
             localStorage.setItem("loggedin", false)
             if(value.refreshToken) {
-                localStorage.setItem("loggedin", true)
-            }
-            if(localStorage.getItem("loggedin")=='true') {
-                ReactThis.setState({error:''})
-                ReactThis.context.router.push('/home')
+                var user = firebase.auth().currentUser;
+                firebase.auth().onAuthStateChanged(function(user) { 
+                      if (user.emailVerified) {
+                        console.log('Email is verified');
+                        localStorage.setItem("loggedin", true)
+                        ReactThis.setState({error:''})
+                        ReactThis.context.router.push('/home')
+                      }
+                      else {
+                        ReactThis.setState({error:''})
+                        ReactThis.setState({isModalOpen: true})
+                    }
+                });
             }
             }).catch(function(error) {
             var errorCode = error.code;
@@ -62,10 +72,17 @@ export default class Home extends React.Component {
         });
     }
 
+    closeModal = () =>{
+        this.setState({isModalOpen: false})
+    }
+
     render() {
         return (
             <div className='outerdiv'>
                 <div className='overlay'></div>
+                <div className='signup-link'>
+                    <Link to='/signup'><button type="submit" className="btn">Sign up</button></Link>
+                </div>
                 <div className='loginpage'>
                     <form id='loginform' className='loginform' onSubmit={this.authenticate}>
                         <div className='form-group'>
@@ -85,6 +102,16 @@ export default class Home extends React.Component {
                         </div>
                     </form>
                 </div>
+                <Modal
+                  isOpen={this.state.isModalOpen}
+                  contentLabel="Modal"
+                  onRequestClose={this.closeModal}
+                  overlayClassName='signin-modal-overlay'
+                  className='signin-modal'
+                >
+                    <p>Please verify your email address before you sign in</p>
+                    <button className='btn btn-modal' onClick={this.closeModal}>OK</button>
+                </Modal>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import SourceListing from '../components/SourceListing.jsx';
 import HeadLines from '../components/HeadLines.jsx';
 import ForgotPassword from '../components/ForgotPassword.jsx';
 import Success from '../components/Success.jsx';
+import SignUp from '../components/SignUp.jsx';
 import '../sass/home.scss';
 
 import { render } from 'react-dom';
@@ -35,5 +36,6 @@ ReactDOM.render((
     <Route path="/headlines" component={HeadLines} onEnter={requireAuth} />
     <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/success" component={Success} />
+    <Route path="/signup" component={SignUp} />
   </Router>
 ), document.getElementById('app'));
