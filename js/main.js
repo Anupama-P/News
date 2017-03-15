@@ -29,9 +29,17 @@ function requireAuth(nextState, replace) {
   }
 }
 
+function checkAuth(nextState, replace) {
+  if (loggedIn()) {
+    replace({
+      pathname: '/home'
+    })
+  }
+}
+
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={Home} />
+    <Route path="/" component={Home} onEnter={checkAuth}/>
     <Route path="/home" component={SourceListing} onEnter={requireAuth} />
     <Route path="/headlines" component={HeadLines} onEnter={requireAuth} />
     <Route path="/forgot-password" component={ForgotPassword} />
