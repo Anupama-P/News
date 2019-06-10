@@ -22,16 +22,11 @@ var config = {
                 plugins: ['transform-runtime'],
                 presets: ['es2015', 'react', 'stage-1']
             }
-        }, 
+        },
         {
             test: /\.scss$/,
             loaders: ['style-loader', 'css-loader', 'sass-loader']
-        }, 
-        { 
-        test: /\.(png|jpg)$/,
-        include: './images',
-        loader: 'url-loader' 
-     }]
+        }]
     }
 }
 
