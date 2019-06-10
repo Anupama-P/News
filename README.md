@@ -1,5 +1,5 @@
 # News
-[Link] https://news-d1750.firebaseapp.com/
+https://news-d1750.firebaseapp.com/
 
 A simple react application which lists down all the news source and articles.
 
@@ -21,4 +21,4 @@ Articles and sources list is pulled from https://newsapi.org/ apis.
 3. Run Application\
    `npm start`
    
-4. Application runs in [link]http://localhost:8001/
+4. Application runs in http://localhost:8001/
